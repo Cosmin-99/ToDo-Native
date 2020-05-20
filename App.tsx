@@ -1,18 +1,27 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View  , ImageBackground, Dimensions, TouchableHighlight} from 'react-native';
+import {Add,Todo} from './src/AddTodo';
+import { Tabs } from './src/Screens';
+import { NavigationContainer } from '@react-navigation/native';
+
+
+ 
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
+
+  const [data,setData] = useState<Todo[]>([])
+
+  return (           
+                <NavigationContainer>
+                  <Tabs dataStorage = {data} />
+                </NavigationContainer>
+        );
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
