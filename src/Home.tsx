@@ -7,9 +7,14 @@ import { View ,SafeAreaView ,TouchableOpacity,Text,StyleSheet,ImageBackground } 
 export function HomeScreen(){
 
     return (
-            <Text style={styles.container}>
-                That's my first ToDo App for mobile , please enjoy it !!!
-            </Text>
+        <ImageBackground source = {require('../app_images/desk.jpg')}
+                         style = {styles.imgBackground}>
+            <View style = {styles.view}>                 
+                <Text style={styles.container}>
+                    That's my first ToDo App for mobile , please enjoy it !!!
+                </Text>
+            </View>    
+        </ImageBackground>
     );
 }
 
@@ -24,7 +29,15 @@ const styles = StyleSheet.create(
         imgBackground: {
             width: '100%',
             height: '100%',
-            flex: 1
-        }
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+
+       view: {
+           width: "80%",
+           height: "80%",
+           backgroundColor: "rgba(255,255,255,.6)"
+       }
     }
 )

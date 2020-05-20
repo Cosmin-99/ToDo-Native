@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text,View, Picker, StyleSheet, ScrollView} from 'react-native';
+import {Text,View, Picker, StyleSheet, ScrollView,ImageBackground} from 'react-native';
 import { Todo , options } from './AddTodo';
 import { SafeAreaView } from 'react-navigation';
 
@@ -9,18 +9,21 @@ export function ShowList(props: {dataStorage: Todo[]}){
     const [selctedValue,setSelectedValue] = useState("")
 
     return(
-        <SafeAreaView style = {styles.view} >
-            <ScrollView>
-                <View >
-                    <Text style = {styles.title}>
-                        Please pick the status 
-                    </Text>
+        <ImageBackground source = {require('../app_images/desk.jpg')}
+                         style = {styles.imgBackground}>
+    
+            <SafeAreaView style = {styles.view} >
+                <ScrollView>
+                    <View>
+                        <Text style = {styles.title}>
+                            Please pick the status 
+                        </Text>
 
                         <Picker selectedValue = {selctedValue} 
                             onValueChange = {(e) => setSelectedValue(e)}
                             style = {styles.picker} >
                                 {options.map(data => <Picker.Item label = {data.label} value = {data.val} />)}
-                            </Picker>
+                        </Picker>
         
                         {props.dataStorage.filter(e => e.status === selctedValue).map(datas =>
                         <Text style = {styles.container}>Title: {datas.titlu}{"\n"}
@@ -32,9 +35,10 @@ export function ShowList(props: {dataStorage: Todo[]}){
                         </Text>
                         ) }
                     
-                   </View>
+                    </View>
                 </ScrollView>
             </SafeAreaView>
+        </ImageBackground>
     );
 }
 
@@ -45,6 +49,19 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         fontFamily: 'sans-serif-light',
         padding: 10,
+        borderColor: 'black',
+        borderRadius: 25,
+        borderWidth: 1,
+        height: 150,
+        backgroundColor: '#87CEFA',
+    },
+
+    imgBackground: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%'
     },
 
     title: {
@@ -64,5 +81,8 @@ const styles = StyleSheet.create({
     view: {
         flex: 1,
         justifyContent: "space-around",
-    }
+        width: "80%",
+        height: "80%",
+        backgroundColor: "rgba(255,255,255,.5)"
+    },
 })

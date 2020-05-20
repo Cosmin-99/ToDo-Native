@@ -13,24 +13,24 @@ export function Tabs(props: { dataStorage: Todo[]}){
 
   return(
   <Tab.Navigator>
-    <Tab.Screen name = "Home" 
+      <Tab.Screen name = "Home" 
                 component = {HomeScreen} 
                 options = {{tabBarIcon: () => (
-                  <MaterialCommunityIcons name = "home" size = {20} color = "red"/>
-      ),
-    }}/>
-    <Tab.Screen name = "Add" 
+                  <MaterialCommunityIcons name = "home-flood" size = {20} color = "red"/>
+                  ),
+                  }}/>
+      <Tab.Screen name = "Add" 
                 component = {prop => <Add {...props}/>}
                 options = {{tabBarIcon: () => (
-                    <MaterialCommunityIcons name = "plus-circle" size = {20} color = "red"/>
-                ),
-                }}/>
-    <Tab.Screen name = "Todos"
+                    <MaterialCommunityIcons name = "plus-circle-multiple-outline" size = {20} color = "red"/>
+                  ),
+                  }}/>
+      <Tab.Screen name = "Todos"
                 component = {prop => <ShowList {...props}/>}
                 options = {{tabBarIcon: () => (
-                  <MaterialCommunityIcons name = "book-open" size = {20} color = "red" />
-                ),
-                }} />
+                  <MaterialCommunityIcons name = "book-open-page-variant" size = {20} color = "red" />
+                  ),
+                  }} />
   </Tab.Navigator>
   );
 }

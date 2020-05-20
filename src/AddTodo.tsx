@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput , Text, Picker, Button , StyleSheet , TouchableOpacity} from 'react-native';
+import { View, TextInput , Text, Picker, Button , StyleSheet , TouchableOpacity, ImageBackground} from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 
@@ -55,61 +55,67 @@ const uploadData = () => {
 }
 
     return (
-        <View style = {styles.container}>
+        <ImageBackground source = {require('../app_images/desk.jpg')}
+                         style = {styles.imgBackground}>
+            <View style = {styles.container}>
             
-            <Text style = {styles.title}>Please type in the form data about Todo</Text>
+                <Text style = {styles.title}>Please type in the form data about Todo</Text>
 
-            <TextInput value = {todo.titlu}
+                <TextInput value = {todo.titlu}
                         placeholder = "Add a title"
                         onChangeText = {(e) => setTodo({...todo , titlu: e})}
                         style = {styles.form}
-                        inlineImageLeft = "mail"
-            />
+                        inlineImageLeft = 'search_icon'
+                />
 
-            <TextInput value = {todo.responsabil}
+                <TextInput value = {todo.responsabil}
                        placeholder = "Type the name of responsible person"
                        onChangeText = {(e) => setTodo({...todo,responsabil: e})}
                        style = {styles.form}
-            />
+                />  
 
-            <Picker selectedValue = {todo.status} style = {styles.form} onValueChange = {(e) => setTodo({...todo,status: e})}>
-            {options.map(data => <Picker.Item label = {data.label} value = {data.val} />)}
-            </Picker>
+                <Picker selectedValue = {todo.status} style = {styles.form} onValueChange = {(e) => setTodo({...todo,status: e})}>
+                {options.map(data => <Picker.Item label = {data.label} value = {data.val} />)}
+                </Picker>
 
-            <TouchableOpacity  onPress = {showDate} style = {styles.button}>
-            <Text style = {styles.text}>Touch to set the due date</Text>
-            </TouchableOpacity>
+                <TouchableOpacity  onPress = {showDate} style = {styles.button}>
+                <Text style = {styles.text}>Touch to set the due date</Text>
+                </TouchableOpacity>
 
-            <DateTimePicker
-             isVisible = {isDateVisible} 
-             mode = "date"
-             onConfirm = {handleConfirm}
-             onCancel = {hideDate}
-            />
+                <DateTimePicker
+                isVisible = {isDateVisible} 
+                mode = "date"
+                onConfirm = {handleConfirm}
+                onCancel = {hideDate}
+                />
              
-             <TouchableOpacity  onPress = {showDate} style = {styles.button}>
-             <Text style = {styles.text}>Touch to set the added date</Text>
-             </TouchableOpacity>
+                <TouchableOpacity  onPress = {showDate} style = {styles.button}>
+                <Text style = {styles.text}>Touch to set the added date</Text>
+                </TouchableOpacity>
 
-            <DateTimePicker
-             isVisible = {isDateVisible} 
-             mode = "date"
-             onConfirm = {handleConfirm}
-             onCancel = {hideDate}
-            />
+                <DateTimePicker
+                isVisible = {isDateVisible} 
+                mode = "date"
+                onConfirm = {handleConfirm}
+                onCancel = {hideDate}
+                />
 
-             <TouchableOpacity  onPress = {uploadData} style = {styles.button2}>
-             <Text style = {styles.text}>Add</Text>
-             </TouchableOpacity>
+                <TouchableOpacity  onPress = {uploadData} style = {styles.button2}>
+                <Text style = {styles.text}>Add</Text>
+                </TouchableOpacity>
 
-        </View>
+            </View>
+        </ImageBackground>    
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+        width: "90%",
+        height: "80%",
+        backgroundColor: "rgba(255,255,255,.6)"
     },
 
     form: {
@@ -139,8 +145,8 @@ const styles = StyleSheet.create({
         marginTop:8,
         paddingTop:8,
         paddingBottom:8,
-        marginLeft:60,
-        marginRight:60,
+        marginLeft:100,
+        marginRight:100,
         backgroundColor:'#6B8E23',
         borderRadius:10,
         borderWidth: 1,
@@ -152,4 +158,12 @@ const styles = StyleSheet.create({
         padding: 50,
         textAlign: 'center',
       },
+
+      imgBackground: {
+        width: '100%',
+        height: '100%',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
 })
