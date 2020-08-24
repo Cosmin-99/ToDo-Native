@@ -99,17 +99,9 @@ export function ShowList(props: { dataStorage: Todo[], setDataStorage: (e: SetSt
                 <ScrollView>
                     <View>
                         <Text style={styles.title}>
-                            Please pick the status
+                            Please pick the ToDo data !!!
                         </Text>
-
-                        <Picker selectedValue={selctedValue}
-                            onValueChange={(e) => setSelectedValue(e)}
-                            style={styles.picker} >
-                            {options.map(data => <Picker.Item label={data.label} value={data.val} />)}
-                        </Picker>
-
                       
-
                     </View>
                     <CalendarList
                         // Enable horizontal scrolling, default = false

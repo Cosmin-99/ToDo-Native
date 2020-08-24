@@ -46,13 +46,13 @@ const hideDate = () => {
 
 const handleConfirm = (date: Date) => {
     setTodo({...todo, termenFinalizare: moment(date).format("YYYY-MM-DD")})
-    console.warn("A date has been picked: ", date);
+    //console.warn("A date has been picked: ", date);
     hideDate();
 }
 
 const handleConfirm2 = (date: Date) => {
     setTodo({...todo, dataFinalizare: moment(date).format("YYYY-MM-DD")})
-    console.warn("A date has been picked: ", date);
+    //console.warn("A date has been picked: ", date);
     hideDate();
 }
 
@@ -107,9 +107,9 @@ const submitData = async () => {
 
                 <DateTimePicker
                 isVisible = {isDateVisible} 
-                mode = "date"
                 onConfirm = {handleConfirm}
                 onCancel = {hideDate}
+                mode = {"date"}
                 />
              
                 <TouchableOpacity  onPress = {showDate} style = {styles.button}>
@@ -118,9 +118,9 @@ const submitData = async () => {
 
                 <DateTimePicker
                 isVisible = {isDateVisible} 
-                mode = "date"
                 onConfirm = {handleConfirm2}
                 onCancel = {hideDate}
+                mode = {"date"}
                 />
 
                 <TouchableOpacity  onPress = {submitData} style = {styles.button2}>
