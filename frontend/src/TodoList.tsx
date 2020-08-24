@@ -5,6 +5,7 @@ import { SafeAreaView, withOrientation } from 'react-navigation';
 import moment from 'moment';
 import { Button, Icon, ListItem } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import {CalendarList} from 'react-native-calendars';
 
 
 export function ShowList(props: { dataStorage: Todo[], setDataStorage: (e: SetStateAction<Todo[]>) => void }) {
@@ -36,7 +37,7 @@ export function ShowList(props: { dataStorage: Todo[], setDataStorage: (e: SetSt
 
     const editTodo = async (): Promise<void> => {
         try {
-            const body = { ...todos};
+            const body = { ...todos };
 
             const response: Response = await fetch(`http://192.168.0.107:5000/todo/${todos.id}`, {
                 method: "PUT",
@@ -88,6 +89,8 @@ export function ShowList(props: { dataStorage: Todo[], setDataStorage: (e: SetSt
         hideDate();
     }
 
+    const [date,setDate] = useState<Date | Object>();
+
     return (
         <ImageBackground source={require('../app_images/desk.jpg')}
             style={styles.imgBackground}>
@@ -105,7 +108,22 @@ export function ShowList(props: { dataStorage: Todo[], setDataStorage: (e: SetSt
                             {options.map(data => <Picker.Item label={data.label} value={data.val} />)}
                         </Picker>
 
-                        {props.dataStorage.filter(e => e.status === selctedValue).map(datas => <ListItem>
+                      
+
+                    </View>
+                    <CalendarList
+                        // Enable horizontal scrolling, default = false
+                        horizontal={true}
+                        // Enable paging on horizontal, default = false
+                        pagingEnabled={true}
+                        // Set custom calendarWidth.
+                        calendarWidth={320}
+
+                        onDayPress={(day) => {setDate(moment(day).format("DD-MM-YYYY").toString())}}
+
+                    />
+                    <ScrollView>
+                    {props.dataStorage.filter(e => moment(e.dataFinalizare).format("DD-MM-YYYY").toString() === date).map(datas => <ListItem>
                             <Text style={styles.container}>{"\n"}Title: {datas.titlu}{"\n"}
                         Responsible: {datas.responsabil}{"\n"}
                         Status: {datas.status}{"\n"}
@@ -120,8 +138,8 @@ export function ShowList(props: { dataStorage: Todo[], setDataStorage: (e: SetSt
                             </Button>
                         </ListItem>
                         )}
+                        </ScrollView>
 
-                    </View>
                 </ScrollView>
             </SafeAreaView>
 
@@ -168,7 +186,7 @@ export function ShowList(props: { dataStorage: Todo[], setDataStorage: (e: SetSt
                         onCancel={hideDate}
                     />
 
-                    <TouchableOpacity onPress={() => {editTodo(); setModal(false)}} style={styles.button2}>
+                    <TouchableOpacity onPress={() => { editTodo(); setModal(false) }} style={styles.button2}>
                         <Text style={styles.text}>Add</Text>
                     </TouchableOpacity>
 
